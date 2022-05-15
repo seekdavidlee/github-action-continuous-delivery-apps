@@ -22,7 +22,7 @@ az acr login -n <ACR NAME> --expose-token
 ```
 10. We can now deploy to our Container registry with the following command.
 ```
-az container create -g <RESOURCE GROUP NAME> --name myapp --image <ACR NAME>.azurecr.io/mywebapp:0.1 --registry-password <VALUE_FROM_ACCESS_TOKEN> -registry-username 00000000-0000-0000-0000-000000000000 --dns-name-label <DNS name> --environment-variables DISABLE_HTTPS_REDIRECT=true
+az container create -g <RESOURCE GROUP NAME> --name myapp --image <ACR NAME>.azurecr.io/mywebapp:0.1 --registry-password <VALUE_FROM_ACCESS_TOKEN> -registry-username 00000000-0000-0000-0000-000000000000 --dns-name-label <DNS name>
 ```
 
 ## Secrets
