@@ -1,7 +1,6 @@
 param($appName, $appVersion, $buildEnv, $buildPath)
 
 $ErrorActionPreference = "Stop"
-$imageName = "$appName`:$appVersion"
 
 $platformRes = (az resource list --tag stack-name=shared-container-registry | ConvertFrom-Json)
 if (!$platformRes) {
@@ -32,6 +31,8 @@ if ($tags) {
 
 if ($shouldBuild -eq $true) {
     # Build your app with ACR build command
+    $imageName = "$appName`:$appVersion"
+    Write-Host "Image name: $imageName"
     az acr build --image $imageName -r $AcrName --file ./$buildPath/Dockerfile .
 
     if ($LastExitCode -ne 0) {
