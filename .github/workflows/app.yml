@@ -12,7 +12,7 @@ env:
 
 jobs:
   build_test:
-    environment: ${{ env.buildEnv }}
+    environment: ${{ buildEnv }}
     name: Build and run tests
     runs-on: windows-latest
     steps:
