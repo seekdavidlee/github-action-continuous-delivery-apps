@@ -4,6 +4,7 @@ on:
       - 'README.md'
     branches-ignore:
       - 'main'
+
 env:
   myWebAppName: 'mywebapp'
   myWebAppVersion: '0.1'
