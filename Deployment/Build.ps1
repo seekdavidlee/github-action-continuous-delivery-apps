@@ -10,7 +10,7 @@ if ($platformRes.Length -eq 0) {
     throw "Unable to find 'ANY' eligible platform container registry!"
 }
 
-$acr = ($platformRes | Where-Object { $_.tags.'stack-environment' -eq $BUILD_EEV })
+$acr = ($platformRes | Where-Object { $_.tags.'stack-environment' -eq $BUILD_ENV })
 if (!$acr) {
     throw "Unable to find eligible container registry!"
 }
