@@ -24,6 +24,7 @@ az acr login -n <ACR NAME> --expose-token
 ```
 az container create -g <RESOURCE GROUP NAME> --name myapp --image <ACR NAME>.azurecr.io/mywebapp:0.1 --registry-password <VALUE_FROM_ACCESS_TOKEN> -registry-username 00000000-0000-0000-0000-000000000000 --dns-name-label <DNS name>
 ```
+11. You should be able to launch the swagger page with /swagger. An example would be ```http://<DNS name>.centralus.azurecontainer.io/swagger/```.
 
 ## Secrets
 | Name | Value |
