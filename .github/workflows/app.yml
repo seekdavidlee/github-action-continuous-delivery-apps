@@ -44,7 +44,7 @@ jobs:
       - id: build-mywebapp
         name: Build MyWebApp
         run: |
-          .\Deployment\Build.ps1 -appName ${{ env.myWebAppName }} `
-            -appVesion ${{ env.myWebAppVersion }} `
-            -buildEnv ${{ env.buildEnv }} `
-            -buildPath MyWebApi
+          .\Deployment\Build.ps1 -APP_NAME ${{ env.myWebAppName }} `
+            -APP_VERSION ${{ env.myWebAppVersion }} `
+            -BUILD_ENV ${{ env.buildEnv }} `
+            -BUILD_PATH MyWebApi

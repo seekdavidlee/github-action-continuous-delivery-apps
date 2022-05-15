@@ -1,4 +1,4 @@
-param($appName, $appVersion, $buildEnv, $buildPath)
+param($APP_NAME, $APP_VERSION, $BUILD_DEV, $BUILD_PATH)
 
 $ErrorActionPreference = "Stop"
 
@@ -10,7 +10,7 @@ if ($platformRes.Length -eq 0) {
     throw "Unable to find 'ANY' eligible platform container registry!"
 }
 
-$acr = ($platformRes | Where-Object { $_.tags.'stack-environment' -eq $buildEnv })
+$acr = ($platformRes | Where-Object { $_.tags.'stack-environment' -eq $BUILD_DEV })
 if (!$acr) {
     throw "Unable to find eligible container registry!"
 }
@@ -22,18 +22,18 @@ if ($LastExitCode -ne 0) {
 }
 
 $shouldBuild = $true
-$tags = az acr repository show-tags --name $AcrName --repository $appName | ConvertFrom-Json
+$tags = az acr repository show-tags --name $AcrName --repository $APP_NAME | ConvertFrom-Json
 if ($tags) {
-    if ($tags.Contains($appVersion)) {
+    if ($tags.Contains($APP_VERSION)) {
         $shouldBuild = $false
     }
 }
 
 if ($shouldBuild -eq $true) {
     # Build your app with ACR build command
-    $imageName = "$appName`:$appVersion"
+    $imageName = "$APP_NAME`:$APP_VERSION"
     Write-Host "Image name: $imageName"
-    az acr build --image $imageName -r $AcrName --file ./$buildPath/Dockerfile .
+    az acr build --image $imageName -r $AcrName --file ./$BUILD_PATH/Dockerfile .
 
     if ($LastExitCode -ne 0) {
         throw "An error has occured. Unable to build image."
