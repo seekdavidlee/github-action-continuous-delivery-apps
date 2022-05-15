@@ -16,7 +16,11 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+var disableHttpsRedirect = builder.Configuration["DISABLE_HTTPS_REDIRECT"] == "true";
+if (!disableHttpsRedirect)
+{
+	app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 

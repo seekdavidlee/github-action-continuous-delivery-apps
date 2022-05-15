@@ -15,6 +15,15 @@ To run the demo, please follow the steps below.
     4. Use the tenant Id of your Azure AAD.
 6. Create a branch
 7. Push your branch and the GitHub Action workflow will run. Check out Actions tab to see it in action.
+8. Once this is completed, you can check the Azure Container Registry for a new repository with ```mywebapp:0.1```.
+9. Next, we can deploy to Azure Container Instance or ACI for testing. Run the following command to get the password which is the vale in the accessToken.
+```
+az acr login -n <ACR NAME> --expose-token
+```
+10. We can now deploy to our Container registry with the following command.
+```
+az container create -g <RESOURCE GROUP NAME> --name myapp --image <ACR NAME>.azurecr.io/mywebapp:0.1 --registry-password <VALUE_FROM_ACCESS_TOKEN> -registry-username 00000000-0000-0000-0000-000000000000 --dns-name-label <DNS name> --environment-variables DISABLE_HTTPS_REDIRECT=true
+```
 
 ## Secrets
 | Name | Value |
