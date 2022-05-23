@@ -1,8 +1,13 @@
-param($APP_NAME, $APP_VERSION, $BUILD_ENV, $BUILD_PATH)
+param(
+    [Parameter(Mandatory = $true)][string]$APP_NAME, 
+    [Parameter(Mandatory = $true)][string]$APP_VERSION, 
+    [Parameter(Mandatory = $true)][string]$BUILD_ENV, 
+    [Parameter(Mandatory = $true)][string]$BUILD_PATH,
+    [Parameter(Mandatory = $true)][string]$STACK_NAME_TAG_PREFIX)
 
 $ErrorActionPreference = "Stop"
 
-$platformRes = (az resource list --tag stack-name=shared-container-registry | ConvertFrom-Json)
+$platformRes = (az resource list --tag stack-name="$STACK_NAME_TAG_PREFIX-shared-container-registry" | ConvertFrom-Json)
 if (!$platformRes) {
     throw "Unable to find eligible container registry!"
 }
