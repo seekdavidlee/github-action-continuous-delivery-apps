@@ -2,7 +2,7 @@
 This is an introduction to GitHub Action Continuous delivery or CD for building .NET Web API Docker Container and pushing into Azure Container Registry
 
 ## Prerequsite
-1. Create a Azure Container Registry with a tag for prefix. The key should be stack-name with a value of STACK_NAME_TAG_PREFIX-shared-container-registry.
+1. Create a Azure Container Registry (ACR) with a tag for prefix. The key should be stack-name with a value of STACK_NAME_TAG_PREFIX-shared-container-registry. Another tag should have a key of stack-environment with a value of dev. Be sure the Service Principal defined in the AZURE_CREDENTIALS below has both Contributor and AcrPush roles in the resource group which contains the ACR.
 
 # Steps
 To run the demo, please follow the steps below.
@@ -33,4 +33,4 @@ az container create -g <RESOURCE GROUP NAME> --name myapp --image <ACR NAME>.azu
 | Name | Value |
 | --- | --- |
 | AZURE_CREDENTIALS | <pre>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;"clientId": "",<br/>&nbsp;&nbsp;&nbsp;&nbsp;"clientSecret": "", <br/>&nbsp;&nbsp;&nbsp;&nbsp;"subscriptionId": "",<br/>&nbsp;&nbsp;&nbsp;&nbsp;"tenantId": "" <br/>}</pre> |
-| STACK_NAME_TAG_PREFIX | Prefix used to identity shared resources such as the Azure Container Registry |
+| STACK_NAME_TAG_PREFIX | Prefix used to identify shared resources such as the Azure Container Registry |

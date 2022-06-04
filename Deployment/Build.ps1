@@ -7,9 +7,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$platformRes = (az resource list --tag stack-name="$STACK_NAME_TAG_PREFIX-shared-container-registry" | ConvertFrom-Json)
+$tagValue = "$STACK_NAME_TAG_PREFIX-shared-container-registry"
+$platformRes = (az resource list --tag stack-name=$tagValue | ConvertFrom-Json)
 if (!$platformRes) {
-    throw "Unable to find eligible container registry!"
+    throw "Unable to find eligible container registry! Did you add a tag of key stack-name and value of $tagValue?"
 }
 if ($platformRes.Length -eq 0) {
     throw "Unable to find 'ANY' eligible platform container registry!"
@@ -17,7 +18,7 @@ if ($platformRes.Length -eq 0) {
 
 $acr = ($platformRes | Where-Object { $_.tags.'stack-environment' -eq $BUILD_ENV })
 if (!$acr) {
-    throw "Unable to find eligible container registry!"
+    throw "Unable to find eligible container registry! Did you add a tag of key stack-environment and value of dev?"
 }
 $AcrName = $acr.Name
 
@@ -34,8 +35,7 @@ if ($tags) {
     }
 }
 
-if ($shouldBuild -eq $true) {
-    # Build your app with ACR build command
+if ($shouldBuild -eq $true) {    
     $imageName = "$APP_NAME`:$APP_VERSION"
     Write-Host "Image name: $imageName"
     az acr build --image $imageName -r $AcrName --file ./$BUILD_PATH/Dockerfile .
