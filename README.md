@@ -33,4 +33,4 @@ az container create -g <RESOURCE GROUP NAME> --name myapp --image <ACR NAME>.azu
 | Name | Value |
 | --- | --- |
 | AZURE_CREDENTIALS | <pre>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;"clientId": "",<br/>&nbsp;&nbsp;&nbsp;&nbsp;"clientSecret": "", <br/>&nbsp;&nbsp;&nbsp;&nbsp;"subscriptionId": "",<br/>&nbsp;&nbsp;&nbsp;&nbsp;"tenantId": "" <br/>}</pre> |
-| STACK_NAME_TAG_PREFIX | Prefix used to identity shared resources such as the Azure Container Registry |
+| STACK_NAME_TAG_PREFIX | Prefix used to identify shared resources such as the Azure Container Registry |

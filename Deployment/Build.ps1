@@ -34,8 +34,7 @@ if ($tags) {
     }
 }
 
-if ($shouldBuild -eq $true) {
-    # Build your app with ACR build command
+if ($shouldBuild -eq $true) {    
     $imageName = "$APP_NAME`:$APP_VERSION"
     Write-Host "Image name: $imageName"
     az acr build --image $imageName -r $AcrName --file ./$BUILD_PATH/Dockerfile .
